@@ -1,0 +1,6 @@
+class Materia {
+    constructor()
+    nombre;
+    
+
+}
