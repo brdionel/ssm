@@ -1,6 +1,2 @@
 class Course {
-    constructor()
-    año;
-    
-
 }

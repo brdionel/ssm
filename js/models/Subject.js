@@ -1,6 +1,3 @@
-class Materia {
-    constructor()
-    nombre;
-    
+class Subject {
 
 }

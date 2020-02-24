@@ -1,6 +1,2 @@
-class Alumno{
-    constructor();
-    
-    rendir();
-    asistir();
+class Student {
 }
