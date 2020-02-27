@@ -25,6 +25,6 @@ function loadPage(page) {
     });
   }
   else {
-    loadPage('/');
+    loadPage('/404');
   }
 }
