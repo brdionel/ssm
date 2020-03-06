@@ -6,7 +6,7 @@ var router = [
   },
   {
     route: '/404',
-    name: '404: NOT FOUND',
+    name: '404_NOT_FOUND',
     url: '/views/errors/e404.html',
   },
   {

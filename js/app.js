@@ -7,7 +7,7 @@ $(document).ready(function(){
   if (path == '') path = '/';
 
   loadPage(path);
-})
+});
 
 function loadPage(page) {
   var item = router.find(item => item.route === page);
@@ -19,6 +19,8 @@ function loadPage(page) {
       method: 'GET',
       success(resp) {
         appContainer.innerHTML = resp;
+        $(`nav.navbar .nav-link`).removeClass('active');
+        $(`nav.navbar .nav-link[data-name=${item.name}]`).addClass('active');
       },
       error(err) {
         alert(`Could not load view "${item.name}"`);
