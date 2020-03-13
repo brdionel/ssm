@@ -5,6 +5,37 @@
 
 nav.navbar .nav-link.active {
   color: var(--primary) !important;
+
+}
+#home-view .imagenPrincipal {
+width: 538px;
+height: 494px;
+padding-top: 120px ;
+}
+
+#home-view .card.cardPrincipal{
+  
+    width: 206px;
+    height: 206px;
+    background: rgb(255, 255, 255);
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0 ,0.5);
+    border:none !important;
+}
+
+#home-view .cardPrincipal i{
+  color: #007BFF;;
+
+}
+
+#home-view .cardPrincipal h4 { 
+  font-size: 34px;
+
+}
+#home-view .titulo {
+  font-size: 40px;
+  border-bottom:  3px solid #007BFF;
 }
 
  #e404 .container-e404{
