@@ -6,3 +6,17 @@
 nav.navbar .nav-link.active {
   color: var(--primary) !important;
 }
+
+ #e404 .container-e404{
+    min-height: calc(100vh - 68px);
+} 
+
+#e404 .img-404{
+    width: 90%;
+}
+
+#e404 .bg-elipse{
+    background-image: url(../assets/elipse.svg);
+    background-repeat: no-repeat;
+    background-position: bottom -18vh center;
+}
