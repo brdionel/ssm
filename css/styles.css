@@ -37,6 +37,20 @@ padding-top: 120px ;
   font-size: 40px;
   border-bottom:  3px solid #007BFF;
 }
+<<<<<<< HEAD
+#about-view .fondo{
+
+    background-image: url(/views/assets/elipse.svg);
+    background-repeat: no-repeat;
+    background-position: bottom -20vh center;
+}
+
+#about-view .container-about{
+    
+    min-height: 100vh;
+
+}
+=======
 
  #e404 .container-e404{
     min-height: calc(100vh - 68px);
@@ -51,3 +65,4 @@ padding-top: 120px ;
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
 }
+>>>>>>> master
