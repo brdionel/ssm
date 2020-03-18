@@ -37,20 +37,6 @@ padding-top: 120px ;
   font-size: 40px;
   border-bottom:  3px solid #007BFF;
 }
-<<<<<<< HEAD
-#about-view .fondo{
-
-    background-image: url(/views/assets/elipse.svg);
-    background-repeat: no-repeat;
-    background-position: bottom -20vh center;
-}
-
-#about-view .container-about{
-    
-    min-height: 100vh;
-
-}
-=======
 
  #e404 .container-e404{
     min-height: calc(100vh - 68px);
@@ -65,4 +51,44 @@ padding-top: 120px ;
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
 }
->>>>>>> master
+
+#student .student-title h1{
+  font-size: 48px;
+  line-height: 64px;
+  font-weight: normal;
+}
+
+#student .btn-md {
+  border-radius: 10px;
+}
+
+#student .btn-md span{
+  position: relative;
+}
+
+#student .btn-md span::before{
+  content: '+';
+  display: inline-block;
+  color: #fff;
+  position: absolute;
+  left: -20px;
+}
+
+#student .thead-blue{
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.table-primary{
+  background-color: rgba(0, 123, 255, 0,09);
+}
+#student .table-radius{
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#student .student-table thead{
+  font-size: 18px;
+}
+

@@ -14,4 +14,9 @@ var router = [
     name: 'About',
     url: '/views/about.html',
   },
+  {
+    route: '/students',
+    name: 'Students',
+    url: '/views/students.html',
+  },
 ];
