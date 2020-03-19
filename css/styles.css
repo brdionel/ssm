@@ -26,7 +26,6 @@ padding-top: 120px ;
 
 #home-view .cardPrincipal i{
   color: #007BFF;;
-
 }
 
 #home-view .cardPrincipal h4 { 
@@ -50,6 +49,19 @@ padding-top: 120px ;
     background-image: url(../assets/elipse.svg);
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
+}
+
+#about-view .fondo{
+
+  background-image: url(/views/assets/elipse.svg);
+  background-repeat: no-repeat;
+  background-position: bottom -20vh center;
+}
+
+#about-view .container-about{
+
+  min-height: 100vh;
+
 }
 
 #student .student-title h1{
@@ -82,6 +94,7 @@ padding-top: 120px ;
 .table-primary{
   background-color: rgba(0, 123, 255, 0,09);
 }
+
 #student .table-radius{
   overflow: hidden;
   border-radius: 10px;
