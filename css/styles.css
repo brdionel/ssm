@@ -5,7 +5,6 @@
 
 nav.navbar .nav-link.active {
   color: var(--primary) !important;
-
 }
 #home-view .imagenPrincipal {
 width: 538px;
@@ -25,16 +24,27 @@ padding-top: 120px ;
 }
 
 #home-view .cardPrincipal i{
-  color: #007BFF;;
+  color: #007BFF;
 }
-
 #home-view .cardPrincipal h4 { 
-  font-size: 34px;
+    font-size: 34px;
+  
+  }
+  #home-view .titulo {
+    font-size: 40px;
+    border-bottom:  3px solid #007BFF;
+  }  
+#about-view .fondo{
 
+    background-image: url(/views/assets/elipse.svg);
+    background-repeat: no-repeat;
+    background-position: bottom -20vh center;
 }
-#home-view .titulo {
-  font-size: 40px;
-  border-bottom:  3px solid #007BFF;
+
+#about-view .container-about{
+    
+    min-height: 100vh;
+
 }
 
  #e404 .container-e404{
@@ -50,18 +60,16 @@ padding-top: 120px ;
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
 }
-
-#about-view .fondo{
-
-  background-image: url(/views/assets/elipse.svg);
-  background-repeat: no-repeat;
-  background-position: bottom -20vh center;
+#subject-view .overflow-hidden {
+    border-radius: 0.5rem!important;
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
 }
+#subject-view .interspersed{
 
-#about-view .container-about{
-
-  min-height: 100vh;
-
+    background: rgba(0, 123, 255, 0.09);
 }
 
 #student .student-title h1{
@@ -91,7 +99,7 @@ padding-top: 120px ;
   color: #fff;
 }
 
-.table-primary{
+#subject-view .table-primary{
   background-color: rgba(0, 123, 255, 0,09);
 }
 
