@@ -60,6 +60,17 @@ padding-top: 120px ;
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
 }
+
+#teachers-views .container .tablaPrincipal {
+  border-color:greenyellow;
+  border-radius: 10px;  
+  Overflow:hidden
+}
+
+
+#teachers-views .trPar {
+  background:rgba(0, 123, 255, 0.09);
+}
 #subject-view .overflow-hidden {
     border-radius: 0.5rem!important;
     border-top-left-radius: 0.5rem !important;

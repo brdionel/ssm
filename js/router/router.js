@@ -14,6 +14,12 @@ var router = [
     name: 'About',
     url: '/views/about.html',
   },
+
+  {
+    route: '/teachers',
+    name: 'Teachers',
+    url: '/views/teachers.html',
+  },
   {
     route: '/subjects',
     name: 'Subjects',
