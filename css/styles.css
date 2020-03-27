@@ -36,9 +36,9 @@ padding-top: 120px ;
   }  
 #about-view .fondo{
 
-    background-image: url(/views/assets/elipse.svg);
+    background-image: url(../assets/elipse.svg);
     background-repeat: no-repeat;
-    background-position: bottom -20vh center;
+    background-position: bottom 0 center;
 }
 
 #about-view .container-about{
