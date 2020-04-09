@@ -1,8 +1,4 @@
-var appContainer;
-
 $(document).ready(function(){
-  appContainer = document.getElementById('app');
-
   var path = window.location.hash.replace('#', '');
   if (path == '') path = '/';
 
@@ -18,7 +14,7 @@ function loadPage(page) {
       url: item.url,
       method: 'GET',
       success(resp) {
-        appContainer.innerHTML = resp;
+        $('#app').html(resp);
         $(`nav.navbar .nav-link`).removeClass('active');
         $(`nav.navbar .nav-link[data-name=${item.name}]`).addClass('active');
       },
