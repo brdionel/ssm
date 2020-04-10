@@ -38,12 +38,12 @@ padding-top: 120px ;
 
     background-image: url(../assets/elipse.svg);
     background-repeat: no-repeat;
-    background-position: bottom 0 center;
+    background-position: bottom -26vh center;
 }
 
 #about-view .container-about{
     
-    min-height: 100vh;
+  min-height: calc(100vh - 116px);
 
 }
 
@@ -59,17 +59,6 @@ padding-top: 120px ;
     background-image: url(../assets/elipse.svg);
     background-repeat: no-repeat;
     background-position: bottom -18vh center;
-}
-
-#teachers-views .container .tablaPrincipal {
-  border-color:greenyellow;
-  border-radius: 10px;  
-  Overflow:hidden
-}
-
-
-#teachers-views .trPar {
-  background:rgba(0, 123, 255, 0.09);
 }
 #subject-view .overflow-hidden {
     border-radius: 0.5rem!important;
@@ -124,3 +113,18 @@ padding-top: 120px ;
   font-size: 18px;
 }
 
+#subject-view .container .tablaPrincipal {
+  border-color:greenyellow;
+  border-radius: 10px;
+  Overflow:hidden
+}
+#subject-view .container .tablaPrincipal a{
+  border:none;
+}
+
+#subject-view .table-striped tbody tr:nth-of-type(even) {
+  background-color:rgba(0, 123, 255, 0.09);
+}
+#subject-view .table-striped tbody tr:nth-of-type(odd) {
+  background-color:white;
+}
