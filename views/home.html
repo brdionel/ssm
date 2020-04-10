@@ -1,4 +1,5 @@
 <div id="home-view">
+  
   <div class="container ">
     <h1 class=" text-center pb-3 titulo"> <b> School Schedule Manager </b></h1>
   </div>
@@ -10,49 +11,57 @@
         </div>
       </div>
       <div class="col-6 p-1">
-        <div class="row">
-          <div class="col-6">
-            <div class="card cardPrincipal  text-center pt-3">
-              <i class="fas fa-users fa-6x  "></i>
-              <div class="card-body">
-                <h4 class="card-title"><b>Courses</b></h4>
-              </div>
+        <div class="row card-group">
+            <div class="col-6">
+              <a href="javascript:loadPage('/courses')">
+                <div class="card card-principal  text-center pt-3">
+                  <i class="fas fa-users fa-6x  "></i>
+                  <div class="card-body">
+                    <h4 class="card-title"><b>Courses</b></h4>
+                  </div>
+                </div>
+              </a>    
+            </div>  
+            <div class="col-6">
+              <a href="javascript:loadPage('/teachers')">  
+                <div class="card card-principal  text-center pt-3">
+                  <i class="fas fa-chalkboard-teacher fa-6x  "></i>
+                  <div class="card-body">
+                    <h4 class="card-title"><b>teachers</b></h4>
+                  </div>
+                </div>
+              </a>    
             </div>
-                
-          </div>  
-          <div class="col-6">
-            <div class="card cardPrincipal  text-center pt-3">
-              <i class="fas fa-chalkboard-teacher fa-6x  "></i>
-              <div class="card-body">
-                <h4 class="card-title"><b>teachers</b></h4>
-              </div>
+            <div class="col-6">
+              <a href="javascript:loadPage('/students')">
+                <div class="card card-principal  text-center pt-3">
+                  <i class="fas fa-book-reader fa-6x  "></i>
+                  <div class="card-body">
+                    <h4 class="card-title"><b> Students </b></h4>
+                  </div>
+                </div>   
+              </a>     
             </div>
-                
-          </div>
-          <div class="col-6">
-            <div class="card cardPrincipal  text-center pt-3">
-              <i class="fas fa-book-reader fa-6x  "></i>
-              <div class="card-body">
-                <h4 class="card-title"><b> Students </b></h4>
-              </div>
-            </div>      
-          </div>
-          <div class="col-6">
-            <div class="card cardPrincipal  text-center pt-3">
-              <i class="fas fa-book fa-6x"></i>
-              <div class="card-body">
-                <h4 class="card-title"><b> Subjets</b></h4>
-              </div>
-            </div>      
-          </div>
-          <div class="col-6">
-            <div class="card cardPrincipal  text-center pt-3">
-              <i class="fas fa-clock fa-6x"></i>
-              <div class="card-body">
-                <h4 class="card-title"><b>Schedules</b></h4>
-              </div>
-            </div>      
-          </div>
+            <div class="col-6">
+              <a href="javascript:loadPage('/subjects')">
+                <div class="card card-principal  text-center pt-3">
+                  <i class="fas fa-book fa-6x"></i>
+                  <div class="card-body">
+                    <h4 class="card-title"><b> Subjets</b></h4>
+                  </div>
+                </div>      
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="javascript:loadPage('/scedules')">
+                <div class="card card-principal  text-center pt-3">
+                  <i class="fas fa-clock fa-6x"></i>
+                  <div class="card-body">
+                    <h4 class="card-title"><b>Schedules</b></h4>
+                  </div>
+                </div>      
+              </a>
+            </div>
           </div>
         </div>  
       </div>  

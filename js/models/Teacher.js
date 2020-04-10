@@ -5,3 +5,6 @@ class Teacher extends User {
         this.registration = registration;
     }
 }
+
+
+

@@ -1,95 +1,187 @@
 <div id="teachers-views">
+ <!--modal created-->                
+    <div class="modal fade" id="new-teacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Created New Teacher</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control"  placeholder="Jorge Dejemplo">
+                      </div>
+                      <div class="form-group">
+                        <label for="formGroupExampleInput2">Last Name</label>
+                        <input type="text" class="form-control"  placeholder="Gomez">
+                      </div>
+                      <div class="form-group">
+                          <label for="formGroupExampleInput2">Registration</label>
+                          <input type="text" class="form-control"  placeholder="10303456">
+                      </div>
+                      <div class="form-group">
+                        <label for="formGroupExampleInput2">User</label>
+                        <input type="text" class="form-control"  placeholder="123458">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-create" data-dismiss="modal">Create</button>
+            </div>
+        </div>
+        </div>
+    </div>
+            
+<!-- Modal update-->
+    <div class="modal fade" id="update-teacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control"  placeholder="Jorge Dejemplo">
+                        </div>
+                        <div class="form-group">
+                        <label for="formGroupExampleInput2">Last Name</label>
+                        <input type="text" class="form-control"  placeholder="Gomez">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Registration</label>
+                            <input type="text" class="form-control"  placeholder="10303456">
+                        </div>  
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">User</label>
+                            <input type="text" class="form-control"  placeholder="12345655">
+                        </div>  
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-update" data-dismiss="modal">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal delete -->
+    <div class="modal fade" id="delete-teacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Teacher</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete this Teachers?</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-delete" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--modal update ok-->
+    <div class="modal" id="save-update" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Update.</strong> Teachers was successfully updated.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        </div>
+    </div>
+     <!--modal create ok-->
+    <div class="modal" id="save-create" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Create.</strong> Teachers was successfully Created.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        </div>
+     </div>
+     <!--modal delete ok-->
+    <div class="modal" id="save-delete" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Delete.</strong> Teachers was successfully Delete.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        </div>
+     </div>
+     <!-- teachers title-->
+    <div class="container mt-5"> 
+        <h1>Teachers</h1>
+    </div>
+    <!--botons new and back-->
     <div class="container">
-        <h2>Teachers</h2>
+        <button type="button" class="btn btn-primary mt-5 btn-lg px-4" data-toggle="modal" data-target="#new-teacher"><i class="fas fa-plus"></i> New</button>
+        <p class="text-center float-right "><a href="javascript:loadPage('/')"  class="btn btn-primary mt-5 btn-lg px-4" role="button">Go Back</a></p>    
     </div>
     <br>
+    <!--list teachers    -->
     <div class="container">
-        <button type="button" class="btn btn-primary ">+ NEW</button>
-    </div>
-    <br>
-    <div class="container">
-        <table class="table table-bordered tablaPrincipal shadow p-3 ">
-            <thead class="btn-primary">
-            <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Birth date</th>
-                <th>DNI</th>
-                <th>File</th>
-                <th>E-mail</th>
-                <th>Gender</th>
-                <th>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </th>
-            </tr>
-            </thead>
+        <table class="table table-bordered tabla-principal shadow p-3 table-striped">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Registration</th> 
+                    <th>User</th>               
+                    <th>
+                        <div class="d-flex justify-content-around">
+                            <i class="far fa-edit"></i></a>
+                            <i class="fas fa-trash-alt"></i>
+                        </div>    
+                    </th>
+                </tr>
+                </thead>
             <tbody>
-            <tr >
-                <td>1</td>
-                <td>Ernesto Gonzalez</td>
-                <td>15/09/1996</td>
-                <td>36235745</td>
-                <td>3516326366</td>
-                <td>ernesto@gmail.com</td>
-                <td>M</td>
-                <td>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </td>
-            </tr>
-            <tr class="trPar">
-                <td>2</td>
-                <td>Ernesto Gonzalez</td>
-                <td>15/09/1996</td>
-                <td>36235745</td>
-                <td>3516326366</td>
-                <td>ernesto@gmail.com</td>
-                <td>M</td>
-                <td>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Ernesto Gonzalez</td>
-                <td>15/09/1996</td>
-                <td>36235745</td>
-                <td>3516326366</td>
-                <td>ernesto@gmail.com</td>
-                <td>M</td>
-                <td>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </td>
-            </tr>
-            <tr class="trPar">
-                <td>4</td>
-                <td>Ernesto Gonzalez</td>
-                <td>15/09/1996</td>
-                <td>36235745</td>
-                <td>3516326366</td>
-                <td>ernesto@gmail.com</td>
-                <td>M</td>
-                <td>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Ernesto Gonzalez</td>
-                <td>15/09/1996</td>
-                <td>36235745</td>
-                <td>3516326366</td>
-                <td>ernesto@gmail.com</td>
-                <td>M</td>
-                <td>
-                    <i class="far fa-edit"></i>
-                    <i class="fas fa-trash-alt"></i>
-                </td>
-            </tr>
+                <tr >
+                    <td><b>1</b> </td>
+                    <td>Ernesto </td>
+                    <td>Gonzalez</td>
+                    <td>36235745</td>
+                    <td>12355455</td>
+                    <td >
+                        <div class="d-flex justify-content-around">
+                            <a data-toggle="modal" data-target="#update-teacher"><i class="fas fa-edit "></i></a>
+                            <a data-toggle="modal" data-target="#delete-teacher"><i class="fas fa-trash-alt"></i></a>
+                        </div>    
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>2</b></td>
+                    <td>Ernesto</td>
+                    <td>Gonzalez</td>
+                    <td>36235745</td>
+                    <td>12345674</td>
+                    <td >
+                        <div class="d-flex justify-content-around">
+                            <a data-toggle="modal" data-target="#update-teacher"><i class="fas fa-edit"></i></a>
+                            <a data-toggle="modal" data-target="#delete-teacher"><i class="fas fa-trash-alt"></i></a>
+                        </div>    
+                    </td>
+                </tr>           
             </tbody>
         </table>
     </div>

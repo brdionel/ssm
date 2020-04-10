@@ -1,3 +1,5 @@
+/* generales */
+
 .navbar-expand-lg .navbar-nav .nav-link {
   padding-left: 1.5rem !important;
   padding-right: 1.5rem !important;
@@ -6,73 +8,125 @@
 nav.navbar .nav-link.active {
   color: var(--primary) !important;
 }
+
+/* marcos  */
 #home-view .imagenPrincipal {
-width: 538px;
-height: 494px;
-padding-top: 120px ;
+  width: 538px;
+  height: 494px;
+  padding-top: 120px ;
 }
 
-#home-view .card.cardPrincipal{
-  
-    width: 206px;
-    height: 206px;
-    background: rgb(255, 255, 255);
-    margin: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0 ,0.5);
-    border:none !important;
+#home-view .card.card-principal {  
+  width: 206px;
+  height: 206px;
+  background: rgb(255, 255, 255);
+  margin: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0 ,0.5);
+  border:none !important;
 }
 
-#home-view .cardPrincipal i{
+#home-view .card-principal i {
   color: #007BFF;
 }
-#home-view .cardPrincipal h4 { 
-    font-size: 34px;
-  
-  }
-  #home-view .titulo {
-    font-size: 40px;
-    border-bottom:  3px solid #007BFF;
-  }  
-#about-view .fondo{
 
-    background-image: url(../assets/elipse.svg);
-    background-repeat: no-repeat;
-    background-position: bottom -26vh center;
+#home-view .card-principal h4 { 
+  font-size: 32px;
+  color: black;
 }
 
-#about-view .container-about{
-    
+#home-view .card-group a {
+  text-decoration: none;
+}
+
+#home-view .titulo {
+  font-size: 40px;
+  border-bottom:  3px solid #007BFF;
+}
+
+#teachers-views .container .tabla-principal {
+  border-color:greenyellow;
+  border-radius: 10px;  
+  Overflow:hidden
+}
+
+#teachers-views .container .tabla-principal a {
+  border:none;
+}
+
+#teachers-views .table-striped tbody tr:nth-of-type(even) {
+  background-color:rgba(0, 123, 255, 0.09);
+}
+
+#teachers-views .table-striped tbody tr:nth-of-type(odd) {
+  background-color:white;
+}
+
+/* maxi */
+#about-view .fondo {
+  background-image: url(../assets/elipse.svg);
+  background-repeat: no-repeat;
+  background-position: bottom -26vh center;
+}
+
+#about-view .container-about {
   min-height: calc(100vh - 116px);
-
 }
 
- #e404 .container-e404{
-    min-height: calc(100vh - 68px);
+#subject-view .container .tablaPrincipal {
+  border-color:greenyellow;
+  border-radius: 10px;
+  Overflow:hidden
+}
+
+#subject-view .container .tablaPrincipal a {
+  border:none;
+}
+
+#subject-view .table-striped tbody tr:nth-of-type(even) {
+  background-color:rgba(0, 123, 255, 0.09);
 } 
 
-#e404 .img-404{
-    width: 90%;
+#subject-view .table-striped tbody tr:nth-of-type(odd) {
+  background-color:white;
 }
 
-#e404 .bg-elipse{
-    background-image: url(../assets/elipse.svg);
-    background-repeat: no-repeat;
-    background-position: bottom -18vh center;
-}
 #subject-view .overflow-hidden {
-    border-radius: 0.5rem!important;
-    border-top-left-radius: 0.5rem !important;
-    border-top-right-radius: 0.5rem !important;
-    border-bottom-right-radius: 0.5rem !important;
-    border-bottom-left-radius: 0.5rem !important;
-}
-#subject-view .interspersed{
-
-    background: rgba(0, 123, 255, 0.09);
+  border-radius: 0.5rem!important;
+  border-top-left-radius: 0.5rem !important;
+  border-top-right-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+  border-bottom-left-radius: 0.5rem !important;
 }
 
-#student .student-title h1{
+#subject-view .interspersed {
+  background: rgba(0, 123, 255, 0.09);
+}
+
+#subject-view .table-primary {
+  background-color: rgba(0, 123, 255, 0,09);
+}
+
+
+/* bruno */
+
+#e404 .container-e404 {
+  min-height: calc(100vh - 68px);
+} 
+
+#e404 .img-404 {
+  width: 90%;
+}
+
+#e404 .bg-elipse {
+  background-image: url(../assets/elipse.svg);
+  background-repeat: no-repeat;
+  background-position: bottom -18vh center;
+}
+
+
+
+#student .student-title h1 {
   font-size: 48px;
   line-height: 64px;
   font-weight: normal;
@@ -82,11 +136,11 @@ padding-top: 120px ;
   border-radius: 10px;
 }
 
-#student .btn-md span{
+#student .btn-md span {
   position: relative;
 }
 
-#student .btn-md span::before{
+#student .btn-md span::before {
   content: '+';
   display: inline-block;
   color: #fff;
@@ -94,37 +148,19 @@ padding-top: 120px ;
   left: -20px;
 }
 
-#student .thead-blue{
+#student .thead-blue {
   background-color: #007BFF;
   color: #fff;
 }
 
-#subject-view .table-primary{
-  background-color: rgba(0, 123, 255, 0,09);
-}
 
-#student .table-radius{
+#student .table-radius {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#student .student-table thead{
+#student .student-table thead {
   font-size: 18px;
 }
 
-#subject-view .container .tablaPrincipal {
-  border-color:greenyellow;
-  border-radius: 10px;
-  Overflow:hidden
-}
-#subject-view .container .tablaPrincipal a{
-  border:none;
-}
-
-#subject-view .table-striped tbody tr:nth-of-type(even) {
-  background-color:rgba(0, 123, 255, 0.09);
-}
-#subject-view .table-striped tbody tr:nth-of-type(odd) {
-  background-color:white;
-}

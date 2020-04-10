@@ -1,4 +1,8 @@
+var appContainer;
+
 $(document).ready(function(){
+  appContainer = document.getElementById('app');
+
   var path = window.location.hash.replace('#', '');
   if (path == '') path = '/';
 
