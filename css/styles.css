@@ -124,43 +124,40 @@ nav.navbar .nav-link.active {
   background-position: bottom -18vh center;
 }
 
-
-
-#student .student-title h1 {
-  font-size: 48px;
-  line-height: 64px;
-  font-weight: normal;
-}
-
-#student .btn-md {
-  border-radius: 10px;
-}
-
-#student .btn-md span {
-  position: relative;
-}
-
-#student .btn-md span::before {
-  content: '+';
-  display: inline-block;
-  color: #fff;
-  position: absolute;
-  left: -20px;
-}
-
-#student .thead-blue {
+#student .thead-blue, #course .thead-blue{
   background-color: #007BFF;
   color: #fff;
 }
 
-
-#student .table-radius {
+#student .table-radius, #course .table-radius{
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+#student thead i, #course thead i{
+  color: #fff;
+}
+
+#student tbody i, #course tbody i{
+  color: #000000;
+}
+
+#student thead a, #course thead a{
+  cursor: auto;
+} 
+#subject-view .table-primary{
+  background-color: rgba(0, 123, 255, 0,09);
+}
+
+#student .table-striped tbody tr:nth-of-type(odd), #course .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+#student .table-striped tbody tr:nth-of-type(even), #course .table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 123, 255, 0.09);
+}
+
 #student .student-table thead {
   font-size: 18px;
 }
-

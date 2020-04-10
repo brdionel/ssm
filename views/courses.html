@@ -1,0 +1,184 @@
+<div id="course">
+    <div class="container mt-5">
+      <!-- Modal New Course -->
+      <div class="modal fade" id="modal-create-course" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="title-modal-create-course" id="title-modal-create-course">Create Course</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin modal create course -->
+
+      <!-- Modal Update Course -->
+      <div class="modal fade" id="modal-update-student" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="title-modal-uodate-course" id="title-modal-update-student">Udpate Course</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name">
+                </div>
+              </form> 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin modal Update Course -->
+
+       <!-- Modal Delete Course -->
+      <div class="modal fade" id="modal-delete-course" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="title-modal-delete-course" id="title-modal-delete-course">Delete Course</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Do woy want to delete this Course?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- fin modal delete course -->
+
+      <section class="course-title  mb-4">
+        <h1>Courses</h1>
+        <div>
+          <button type="button" class="btn btn-primary btn-lg mt-5 px-4" data-toggle="modal" data-target="#modal-create-course">
+            <i class="fas fa-plus"></i>
+            <span>New</span>
+          </button>
+          <p class="text-center float-right">
+            <a href="javascript:loadPage('/')"  class="btn btn-primary mt-5 btn-lg" role="button">Go Back</a>
+          </p>
+        </div>
+      </section>
+      <section class="course-table">
+        <table class="table table-bordered table-radius table-striped">
+          <thead class="thead-blue">
+            <tr>
+              <th class="text-center">ID</th>
+              <th class="w-75">Name</th>
+              <th>
+                <div class="d-flex justify-content-around align-items-center">
+                  <a href="">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+              </th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td>Mark</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center">
+                  <a href="" data-toggle="modal" data-target="#modal-update-course">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="" data-toggle="modal" data-target="#modal-delete-course">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                </td>
+              </tr> 
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td>Mark</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center">
+                  <a href="" data-toggle="modal" data-target="#modal-update-course">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="" data-toggle="modal" data-target="#modal-delete-course">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                </td>
+              </tr> 
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td>Mark</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center">
+                  <a href="" data-toggle="modal" data-target="#modal-update-course">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="" data-toggle="modal" data-target="#modal-delete-course">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                </td>
+              </tr> 
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td>Mark</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center">
+                  <a href="" data-toggle="modal" data-target="#modal-update-course">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="" data-toggle="modal" data-target="#modal-delete-course">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                </td>
+              </tr> 
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td>Mark</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center">
+                  <a href="" data-toggle="modal" data-target="#modal-update-course">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="" data-toggle="modal" data-target="#modal-delete-course">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                </td>
+              </tr> 
+            </tbody>
+        </table>       
+      </section>
+    </div>
+</div>

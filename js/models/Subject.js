@@ -1,8 +1,8 @@
 class Subject {
     id;
     name;
-    constructor(id, name){
-        this.id = id;
+    constructor(name, id){
         this.name = name;
+        this.id = id;
     }
 }

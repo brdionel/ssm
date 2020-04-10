@@ -35,4 +35,9 @@ var router = [
     name: 'Students',
     url: '/views/students.html',
   },
+  {
+    route: '/courses',
+    name: 'Courses',
+    url: '/views/courses.html',
+  },
 ];
