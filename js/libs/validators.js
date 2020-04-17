@@ -53,13 +53,3 @@ class Validators {
     return result;
   }
 }
-
-const result = Validators.validate('hola', {
-  required: true,
-  numeric: true,
-  min: 5,
-  max: 10,
-  email: true,
-  minLength: 0,
-  maxLength: 100,
-});
