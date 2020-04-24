@@ -10,28 +10,34 @@
             </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="id-form-create">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Name</label>
-                        <input type="text" class="form-control"  placeholder="Jorge Dejemplo">
-                      </div>
-                      <div class="form-group">
+                        <input type="text" class="form-control" id='input-name'  placeholder="Jorge Dejemplo">
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="formGroupExampleInput2">Last Name</label>
-                        <input type="text" class="form-control"  placeholder="Gomez">
-                      </div>
-                      <div class="form-group">
-                          <label for="formGroupExampleInput2">Registration</label>
-                          <input type="text" class="form-control"  placeholder="10303456">
-                      </div>
-                      <div class="form-group">
-                        <label for="formGroupExampleInput2">User</label>
-                        <input type="text" class="form-control"  placeholder="123458">
+                        <input type="text" class="form-control" id='input-last-name' placeholder="Gomez">
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Registration</label>
+                        <input type="number" class="form-control" id="input-registration" placeholder="10303456">
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-create" data-dismiss="modal">Create</button>
+            <button type="button" class="btn btn-primary"  onclick="teacherController.createdTeacher()"  >Create</button>
             </div>
         </div>
         </div>
@@ -48,28 +54,25 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="id-form-update">
                         <div class="form-group">
                         <label for="formGroupExampleInput">Name</label>
-                        <input type="text" class="form-control"  placeholder="Jorge Dejemplo">
+                        <input type="text" class="form-control" id="input-name-update" placeholder="Jorge Dejemplo">
                         </div>
                         <div class="form-group">
                         <label for="formGroupExampleInput2">Last Name</label>
-                        <input type="text" class="form-control"  placeholder="Gomez">
+                        <input type="text" class="form-control"  placeholder="Gomez" id="input-last-name-update">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Registration</label>
-                            <input type="text" class="form-control"  placeholder="10303456">
+                            <input type="number" class="form-control"  placeholder="10303456"  id="input-registration-update">
                         </div>  
-                        <div class="form-group">
-                            <label for="formGroupExampleInput2">User</label>
-                            <input type="text" class="form-control"  placeholder="12345655">
-                        </div>  
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-update" data-dismiss="modal">Update</button>
+                    <button type="button" class="btn btn-primary"  onclick="teacherController.updateTeacher()">Update</button>
                 </div>
             </div>
         </div>
@@ -89,7 +92,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#save-delete" data-dismiss="modal">Delete</button>
+            <button type="button" class="btn btn-primary"  onclick="teacherController.deleteTeacherok()" >Delete</button>
             </div>
         </div>
         </div>
@@ -99,9 +102,6 @@
         <div class="modal-dialog" role="document">
             <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
             <strong>Successful Update.</strong> Teachers was successfully updated.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             </div>
         </div>
     </div>
@@ -110,9 +110,6 @@
         <div class="modal-dialog" role="document">
             <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
             <strong>Successful Create.</strong> Teachers was successfully Created.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             </div>
         </div>
      </div>
@@ -121,9 +118,6 @@
         <div class="modal-dialog" role="document">
             <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
             <strong>Successful Delete.</strong> Teachers was successfully Delete.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             </div>
         </div>
      </div>
@@ -146,7 +140,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Registration</th> 
-                    <th>User</th>               
+                                 
                     <th>
                         <div class="d-flex justify-content-around">
                             <i class="far fa-edit"></i></a>
@@ -155,7 +149,7 @@
                     </th>
                 </tr>
                 </thead>
-            <tbody>
+            <tbody id="table-teacher">
                 <tr >
                     <td><b>1</b> </td>
                     <td>Ernesto </td>
@@ -165,7 +159,7 @@
                     <td >
                         <div class="d-flex justify-content-around">
                             <a data-toggle="modal" data-target="#update-teacher"><i class="fas fa-edit "></i></a>
-                            <a data-toggle="modal" data-target="#delete-teacher"><i class="fas fa-trash-alt"></i></a>
+                            <a data-toggle="modal" data-target="#delete-teacher" ><i class="fas fa-trash-alt"></i></a>
                         </div>    
                     </td>
                 </tr>
@@ -186,3 +180,9 @@
         </table>
     </div>
 </div>
+
+<script>
+    var teacherController = new TeachersController();
+    teacherController.listTeachers()
+</script>
+

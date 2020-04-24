@@ -1,10 +1,9 @@
 class Teacher extends User {
     registration;
-    constructor(name, lastName, user, registration){
-        super(name, lastName, user);
+    constructor(id, name, lastName, registration){
+        super(id, name, lastName);
         this.registration = registration;
     }
 }
-
 
 

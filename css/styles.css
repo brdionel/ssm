@@ -62,6 +62,11 @@ nav.navbar .nav-link.active {
   background-color:white;
 }
 
+#teachers-views .action-icon {
+  color: #000000;
+}
+
+
 /* maxi */
 #about-view .fondo {
   background-image: url(../assets/elipse.svg);
