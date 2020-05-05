@@ -1,7 +1,7 @@
 class Student extends User {
     file;
-    constructor(name, lastName, user, file){
-        super(name, lastName, user);
+    constructor(id, name, lastName, file){
+        super(id, name, lastName);
         this.file = file;
     }
 }

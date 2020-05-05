@@ -1,30 +1,60 @@
-class StudentController {
-
+class StudentsController {
+  
+  ultimoId = studentList.length+1;
   selectedStudent = null;
+  
+  formCreate = {
+    name: {
+      element: document.getElementById('input-screate-fname'),
+      status: false,
+      validators: {
+        required: true
+      }
+    },
+    lastName: {
+      element: document.getElementById('input-screate-lname'),
+      status: false,
+      validators: {
+        required: true,
+        minLength: 3,
+        maxLength: 80,
+      }
+    },
+    file: {
+      element: document.getElementById('input-screate-file'),
+      status: false,
+      validators: {
+        required: true,
+        numeric:true,  
+      }
+    },
+  };
+
+  constructor(){
+    $('#modal-create-student').on('hidden.bs.modal', () => {
+      this.resetForm('create');
+    });
+  };
 
   listStudents() {
-    var studentsToShow = studentList.map((item, i) => {
-      return new Student(item.id, item.name, item.lastName, item.user, item.file);
+
+    var studentsToShow = studentList.map((item) => {
+      return new Student(item.id, item.name, item.lastName, item.file);
     });
-
+    
     var rowHtml = '';
-
-    studentsToShow.forEach((item, i) => {
+    
+    studentsToShow.forEach((item) => {
       rowHtml += `
         <tr>
-          <td>${item.id}</td>
+          <td class="text-center">${item.id}</td>
           <td>${item.name}</td>
           <td>${item.lastName}</td>
-          <td>${item.user}</td>
           <td>${item.file}</td>
           <td>
-            <div class="d-flex justify-content-around align-items-center">
-              <a href="" data-toggle="modal" data-target="#modal-update-student">
-                  <i class="fas fa-edit"></i>
-              </a>
-              <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                  <i class="fas fa-trash-alt"></i>
-              </a>
+            <div class="d-flex justify-content-around align-items-center bloque-iconos">
+              <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-student"></i>
+              <i class="fas fa-trash-alt icono-delete" data-toggle="modal" data-target="#modal-delete-student" class="borrar-student" onclick="studentController.studentSelected(${item.id})"></i> 
             </div>
           </td>
         </tr>
@@ -34,40 +64,96 @@ class StudentController {
     document.getElementById('tbody-student').innerHTML = rowHtml;
   }
 
-
   // add create function
-
+  // i receive the values from the form
+  createStudent(name, lastName, file){
+    if ( ! this.validate(this.formCreate) ) return false;
+    var student = new Student(this.ultimoId++, name, lastName, file);
+    studentList.push(student);
+    this.listStudents();
+    
+    $('#modal-create-student').modal('hide');
+    $('#modal-alert-create').modal('show');
+    setTimeout(() => {
+      $('#modal-alert-create').modal('hide');
+    }, 3000)
+    this.resetForm('create');
+  }
 
   // add update function
-
+  // here i selected the student when i clicked on the deleted icon . 
+  studentSelected(idStudent){
+    this.selectedStudent = idStudent;
+  }
 
   // add delete function
+  deleteStudent(){
+    var idStudents = studentList.map(student => student.id);
+    var indexStudentToDelete = idStudents.indexOf(this.selectedStudent);
+    studentList.splice(indexStudentToDelete, 1);
+    
+    $('#modal-delete-student').modal('hide');
+    $('#modal-alert-delete').modal('show');
+    setTimeout(() => {
+      $('#modal-alert-delete').modal('hide');
+    }, 3000)
+    
+    this.listStudents();
+  }
+
+  resetForm(formName){
+    document.getElementById(`form-student-${formName}`).reset();
+    var inputform = document.querySelectorAll(`#form-student-${formName} input`);
+    inputform.forEach((item) =>{
+      item.classList.remove('is-invalid','is-valid');  
+    });
+  }
+
+  validate(form){
+    var formKeys = Object.keys(form);
+    var response = true;
+
+    formKeys.forEach((field) => {
+
+      var value = form[field].element.value;
+      var validators = form[field].validators;
+      var result = Validators.validate(value, validators);
+      var error = Object.keys(result).map(validator => result[validator]).find(val => val === false);
+      form[field].status = (error === undefined); 
+      
+      // it paints the fields according to the validation result
+      if (!form[field].status) {
+        form[field].element.classList.add("is-invalid");
+        form[field].element.classList.remove("is-valid");
+        response = false;
+      } else {
+        form[field].element.classList.add("is-valid");
+        form[field].element.classList.remove("is-invalid");
+      };
+    })
+
+    return response;
+  };
 
 }
-
-var studentController = new StudentController();
-console.log("estamos")
 
 var studentList = [
   {
     id: 1,
     name: 'Bruno',
     lastName: 'Vicente',
-    user: 'brdionel11',
     file: 23213
   },
   {
     id: 2,
     name: 'Marco',
     lastName: 'Cuchian',
-    user: 'mcuchian',
     file: 1235132
   },
   {
     id: 3,
     name: 'Maxi',
     lastName: 'Longoni',
-    user: 'mlongoni',
     file: 1325
   },
 ];

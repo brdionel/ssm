@@ -166,3 +166,11 @@ nav.navbar .nav-link.active {
 #student .student-table thead {
   font-size: 18px;
 }
+
+#student .bloque-iconos{
+  min-height: 24px;
+}
+
+#student .icono-delete, #student .icono-update{
+  cursor: pointer;
+}

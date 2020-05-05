@@ -2,233 +2,173 @@
   <div class="container mt-5">
     <!-- Modal New Student -->
     <div class="modal fade" id="modal-create-student" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="title-modal-create-student" id="title-modal-create-student">Create Student</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="first-name">First Name</label>
-                  <input type="text" class="form-control" id="first-name">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="title-modal-create-student" id="title-modal-create-student">Create Student</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="form-student-create">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" class="form-control" id="input-screate-fname" placeholder="Franco"> 
+                <div class="invalid-feedback">
+                  Please enter the student's name
                 </div>
-                <div class="form-group">
-                  <label for="last-name">Last Name</label>
-                  <input type="text" class="form-control" id="last-name">
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" class="form-control" id="input-screate-lname" placeholder="Vazquez">
+                <div class="invalid-feedback">
+                  Please enter the student's last name
                 </div>
-                <div class="form-group">
-                  <label for="user">User</label>
-                  <input type="text" class="form-control" id="user">
-                </div> 
-                <div class="form-group">
-                  <label for="file">File</label>
-                  <input type="text" class="form-control" id="file">
-                </div> 
-              </form>
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create</button>
-            </div>
+              </div> 
+              <div class="form-group">
+                <label for="file">File</label>
+                <input type="text" class="form-control" id="input-screate-file" placeholder="1234">
+                <div class="invalid-feedback">
+                  Please enter the student's file (only numbers)
+                </div>
+              </div> 
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="studentController.createStudent(document.forms['form-student-create'].elements[0].value, document.forms['form-student-create'].elements[1].value, document.forms['form-student-create'].elements[2].value)">Create</button>
           </div>
         </div>
+      </div>
     </div>
     <!-- fin modal create student -->
 
+    <!-- alert Create Student -->
+    <div class="modal fade" id="modal-alert-create" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          The student has been created.
+        </div>
+      </div>
+    </div>
+    <!-- fin alert -->
+
     <!-- Modal Update Student -->
     <div class="modal fade" id="modal-update-student" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="title-modal-create-student" id="title-modal-create-student">Udpate Student</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="first-name">First Name</label>
-                  <input type="text" class="form-control" id="first-name">
-                </div>
-                <div class="form-group">
-                  <label for="last-name">Last Name</label>
-                  <input type="text" class="form-control" id="last-name">
-                </div>
-                <div class="form-group">
-                  <label for="user">User</label>
-                  <input type="text" class="form-control" id="user">
-                </div> 
-                <div class="form-group">
-                  <label for="file">File</label>
-                  <input type="text" class="form-control" id="file">
-                </div> 
-              </form>
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Update</button>
-            </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="title-modal-create-student" id="title-modal-create-student">Udpate Student</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" class="form-control" id="input-supdate-fname">
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" class="form-control" id="input-supdate-lname">
+              </div>
+              <div class="form-group">
+                <label for="user">User</label>
+                <input type="text" class="form-control" id="input-supdate-user">
+              </div> 
+              <div class="form-group">
+                <label for="file">File</label>
+                <input type="text" class="form-control" id="input-supdate-file">
+              </div> 
+            </form>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Update</button>
           </div>
         </div>
+      </div>
     </div>
     <!-- fin modal Update student -->
 
     <!-- Modal Delete Student -->
     <div class="modal fade" id="modal-delete-student" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="title-modal-delete-student" id="title-modal-delete-student">Delete Student</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Do woy want to delete this Student?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Delete</button>
-            </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="title-modal-delete-student" id="title-modal-delete-student">Delete Student</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Do woy want to delete this Student?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="studentController.deleteStudent()">Delete</button>
           </div>
         </div>
+      </div>
     </div>
     <!-- fin modal Update student -->
 
+    <!-- alert Create Student -->
+    <div class="modal fade" id="modal-alert-delete" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          The student has been removed.
+        </div>
+      </div>
+    </div>
+    <!-- fin alert -->
+
     <!-- encabezado -->
     <section class="student-title mb-4">
-        <h1>Students</h1>
-        <div>
-          <button type="button" class="btn btn-primary btn-lg mt-5 px-4" data-toggle="modal" data-target="#modal-create-student">
-            <i class="fas fa-plus"></i>
-            <span>New</span>
-          </button>
-          <p class="text-center float-right">
-            <a href="javascript:loadPage('/')"  class="btn btn-primary mt-5 btn-lg" role="button">Go Back</a>
-          </p>
-        </div>
+      <h1>Students</h1>
+      <div>
+        <button type="button" class="btn btn-primary btn-lg mt-5 px-4" data-toggle="modal" data-target="#modal-create-student">
+          <i class="fas fa-plus"></i>
+          <span>New</span>
+        </button>
+        <p class="text-center float-right">
+          <a href="javascript:loadPage('/')"  class="btn btn-primary mt-5 btn-lg" role="button">Go Back</a>
+        </p>
+      </div>
     </section>
     <!-- fin encabezado -->
 
     <!-- student table -->
     <section class="student-table">
-        <table class="table table-bordered table-radius table-striped">
-          <thead class="thead-blue">
-            <tr>
-              <th class="text-center">ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>User</th>
-                <th>File</th>
-              <th>
-                <div class="d-flex justify-content-around align-items-center border-thead-icons">
-                  <a>
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a>
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="tbody-student">
-              <tr>
-                <th class="text-center" scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <div class="d-flex justify-content-around align-items-center">
-                    <a href="" data-toggle="modal" data-target="#modal-update-student">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </div>
-                </td>
-              </tr> 
-              <tr>
-                <th class="text-center" scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <div class="d-flex justify-content-around align-items-center">
-                    <a href="" data-toggle="modal" data-target="#modal-update-student">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                 </div>
-                </td>
-              </tr>
-              <tr>
-                <th class="text-center" scope="row">3</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <div class="d-flex justify-content-around align-items-center">
-                    <a href="" data-toggle="modal" data-target="#modal-update-student">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th class="text-center" scope="row">4</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <div class="d-flex justify-content-around align-items-center">
-                    <a href="" data-toggle="modal" data-target="#modal-update-student">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                      <i class="fas fa-trash-alt"></i>
-                   </a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th class="text-center" scope="row">3</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <div class="d-flex justify-content-around align-items-center">
-                    <a href="" data-toggle="modal" data-target="#modal-update-student">
-                      <i class="fas fa-edit"></i>
-                   </a>
-                    <a href="" data-toggle="modal" data-target="#modal-delete-student">
-                      <i class="fas fa-trash-alt"></i>
-                   </a>
-                 </div>
-                </td>
-              </tr>
-          </tbody>
-        </table>  
+      <table class="table table-bordered table-radius table-striped">
+        <thead class="thead-blue">
+          <tr>
+            <th class="text-center">ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>File</th>
+            <th>
+              <div class="d-flex justify-content-around align-items-center border-thead-icons">
+                <a><i class="fas fa-edit"></i></a>
+                <a><i class="fas fa-trash-alt"></i></a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tbody-student">
+        </tbody>
+      </table>  
     </section>
     <!-- Fin student table -->
 
   </div>
 </div>
+
+<script>  
+  var studentController = new StudentsController();
+  studentController.listStudents();
+</script>
