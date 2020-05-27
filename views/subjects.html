@@ -1,30 +1,33 @@
 <div id="subject-view">
   <div>
-    <div class="modal" id="Create-Modal" tabindex="-1" role="dialog">
+    <div class="modal" id="create-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div id="create-subject" class="modal-header">
             <h5 class="modal-title">Create subjects</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body"> 
-            <form>
+            <form id="form-create">
               <div class="form-row">
                 <label>Subject</label>
-                <input type="text" class="form-control" id="limpiar-campo" >
+                <input id='subject-new' type="text" class="form-control"  placeholder="Example: Math">
+                <div class="invalid-feedback">
+                  Please insert a subject.
+                </div>
               </div> 
             </form>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#save-subjects">Save</button>
+              <button onclick="subjectController.createSubject()" type="button" class="btn btn-primary">Save</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal" id="Edit-Modal" tabindex="-1" role="dialog">
+    <div class="modal" id="edit-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -34,23 +37,26 @@
             </button>
           </div>
           <div class="modal-body"> 
-            <form>
+            <form id="form-update" >
               <div class="form-row">
                 <label for="validationServer01">Subject</label>
-                <input type="text" class="form-control">
+                <input id="subject-edit" type="text" class="form-control" placeholder="Example: Math">
+                <div class="invalid-feedback">
+                  Please insert a subject.
+                </div>
               </div>
               <div class="form-row">
               </div>
             </form>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#update-subjects">Update</button>
+              <button onclick="subjectController.updateSubject()" type="button" class="btn btn-primary">Update</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal" id="Delete-Modal" tabindex="-1" role="dialog">
+    <div class="modal" id="delete-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -64,7 +70,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#delete-subjects">Delete</button>
+            <button onclick="subjectController.deleteSubject()" id="subject-delete" type="button" class="btn btn-primary">Delete</button>
           </div>
         </div>
       </div>
@@ -72,36 +78,27 @@
     <div class="modal" id="save-subjects" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
-          <strong>Successful creation.</strong> The subjects have been created successfully.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <strong>Successfully created.</strong> The subject has been successfully created.
         </div>
       </div>
     </div>
     <div class="modal" id="update-subjects" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
-          <strong>Successfully update.</strong> The subjects have been successfully updated.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <strong>Successfully updated.</strong> The subject has been successfully updated.
         </div>
       </div>
     </div>
     <div class="modal" id="delete-subjects" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
-          <strong>Successfully removed.</strong> The subjects have been successfully removed.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <strong>Successfully removed.</strong> The subject has been successfully removed.
         </div>
       </div>
     </div>
     <div class="container mt-5">
       <h1>Subjects</h1>
-      <button type="button" class="btn btn-primary mt-5 btn-lg px-4" data-toggle="modal" data-target="#Create-Modal"><i class="fas fa-plus"></i> New</button>
+      <button type="button" class="btn btn-primary mt-5 btn-lg px-4" data-toggle="modal" data-target="#create-modal"><i class="fas fa-plus"></i> New</button>
       <p class="text-center float-right"><a href="javascript:loadPage('/')"  class="btn btn-primary mt-5 btn-lg px-4" role="button">Go Back</a></p>
       <table class="table table-bordered tablaPrincipal shadow p-3 table-striped text-center">
         <thead class="bg-primary text-white">
@@ -111,29 +108,33 @@
             <th scope="col"><i class="fas fa-edit mr-4"></i><i class="fas fa-trash-alt"></i></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='table-subject'>
           <tr>
             <th scope="row">1</th>
             <td class="text-left">Math</td>
-            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#Edit-Modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#Delete-Modal"></i></th>
+            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></th>
           </tr>
           <tr class="interspersed ">
             <th scope="row">2</th>
             <td class="text-left">Physical</td>
-            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#Edit-Modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#Delete-Modal"></i></th>
+            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></th>
           </tr>
           <tr>
             <th scope="row">3</th>
             <td class="text-left">English</td>
-            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#Edit-Modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#Delete-Modal"></i></th>
+            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></th>
           </tr>
           <tr class="interspersed">
             <th scope="row">4</th>
             <td class="text-left">Chemistry</td>
-            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#Edit-Modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#Delete-Modal"></i></th>
+            <th scope="col"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i> <i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></th>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+<script> 
+  var subjectController = new SubjectsController();
+  subjectController.listSubjects(); 
+</script> 

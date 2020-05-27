@@ -112,6 +112,9 @@ nav.navbar .nav-link.active {
   background-color: rgba(0, 123, 255, 0,09);
 }
 
+#subject-view .action-icon {
+  color: #000000;
+}
 
 /* bruno */
 
