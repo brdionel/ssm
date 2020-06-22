@@ -30,6 +30,33 @@ class StudentsController {
     },
   };
 
+  formUpdate = {
+    name: {
+      element: document.getElementById('input-supdate-fname'),
+      status: false,
+      validators: {
+        required: true
+      }
+    },
+    lastName: {
+      element: document.getElementById('input-supdate-lname'),
+      status: false,
+      validators: {
+        required: true,
+        minLength: 3,
+        maxLength: 80,
+      }
+    },
+    file: {
+      element: document.getElementById('input-supdate-file'),
+      status: false,
+      validators: {
+        required: true,
+        numeric:true,  
+      }
+    },
+  };
+
   constructor(){
     $('#modal-create-student').on('hidden.bs.modal', () => {
       this.resetForm('create');
@@ -53,7 +80,7 @@ class StudentsController {
           <td>${item.file}</td>
           <td>
             <div class="d-flex justify-content-around align-items-center bloque-iconos">
-              <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-student"></i>
+              <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-student" onclick="studentController.updateHandler(${item.id})"></i>
               <i class="fas fa-trash-alt icono-delete" data-toggle="modal" data-target="#modal-delete-student" class="borrar-student" onclick="studentController.studentSelected(${item.id})"></i> 
             </div>
           </td>
@@ -65,9 +92,11 @@ class StudentsController {
   }
 
   // add create function
-  // i receive the values from the form
-  createStudent(name, lastName, file){
+  createStudent(){
     if ( ! this.validate(this.formCreate) ) return false;
+    let name = this.formCreate.name.element.value;
+    let lastName = this.formCreate.lastName.element.value;
+    let file = this.formCreate.file.element.value;
     var student = new Student(this.ultimoId++, name, lastName, file);
     studentList.push(student);
     this.listStudents();
@@ -80,16 +109,48 @@ class StudentsController {
     this.resetForm('create');
   }
 
+  // Select and load student's data
+  updateHandler(idStudent){
+    this.studentSelected(idStudent);
+    this.loadDataModalUpdate();
+  }
+
+  loadDataModalUpdate(){
+    var indexStudentToUpdate = this.indexStudent();
+    var studentToUpdate = studentList[indexStudentToUpdate];
+    this.formUpdate.name.element.value =  studentToUpdate.name;
+    this.formUpdate.lastName.element.value =  studentToUpdate.lastName;
+    this.formUpdate.file.element.value =  studentToUpdate.file;
+  }
+
   // add update function
-  // here i selected the student when i clicked on the deleted icon . 
+  updateStudent(){
+    if ( ! this.validate(this.formUpdate) ) return false;
+    var firstNameStudent = this.formUpdate.name.element.value;
+    var lastNameStudent = this.formUpdate.lastName.element.value;
+    var fileStudent = this.formUpdate.file.element.value;
+    var indexToUpdate = this.indexStudent();
+    var updatedStudent = studentList[indexToUpdate];
+    updatedStudent.name = firstNameStudent;
+    updatedStudent.lastName = lastNameStudent;
+    updatedStudent.file = fileStudent;
+    this.listStudents();
+
+    $('#modal-update-student').modal('hide');
+    $('#modal-alert-update').modal('show');
+    setTimeout(() => {
+      $('#modal-alert-update').modal('hide');
+    }, 3000)
+    this.resetForm('update');
+  }
+
   studentSelected(idStudent){
     this.selectedStudent = idStudent;
   }
 
   // add delete function
   deleteStudent(){
-    var idStudents = studentList.map(student => student.id);
-    var indexStudentToDelete = idStudents.indexOf(this.selectedStudent);
+    var indexStudentToDelete = this.indexStudent();
     studentList.splice(indexStudentToDelete, 1);
     
     $('#modal-delete-student').modal('hide');
@@ -134,6 +195,11 @@ class StudentsController {
 
     return response;
   };
+
+  indexStudent(){
+    var idStudents = studentList.map(student => student.id);
+    return idStudents.indexOf(this.selectedStudent);
+  }
 
 }
 
