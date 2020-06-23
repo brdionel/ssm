@@ -1,7 +1,6 @@
 class TeachersController {
     ultimoId = 0;
     selectedTeacher = null;
-    selectedTeacherdelete = null;
     formCreate = {
       name: {
         element: document.getElementById('input-name'),
@@ -109,7 +108,7 @@ class TeachersController {
 
       $('#new-teacher').modal('toggle');
       $('#save-create').modal('show');
-      setTimeout(function(){
+      setTimeout(() => {
         $('#save-create').modal('hide');
       }, 1000);
       this.resetForm('create');
@@ -118,28 +117,24 @@ class TeachersController {
     TeacherSelect(id){
       var idselect = id;
       this.selectedTeacher = idselect;
-      console.log("seleccionamos el id :::"+this.selectedTeacher)
     };
 
     updateTeacher(){
       if ( ! this.validate(this.formUpdate) ) return false;
-      console.log("update teacher " + this.selectedTeacher);
       teacherList.forEach((teacher, i) => {
         if(teacher.id === this.selectedTeacher){
           var arrayTeacher = teacherList.indexOf(teacher);
-          console.log(arrayTeacher);
           var name = document.getElementById('input-name-update').value;
           var lastName = document.getElementById('input-last-name-update').value;
           var registration = document.getElementById('input-registration-update').value;
           teacherList[arrayTeacher].name = name;
           teacherList[arrayTeacher].lastName = lastName;
           teacherList[arrayTeacher].registration = registration;
-          console.log(name, lastName, registration);
 
 
           $('#update-teacher').modal('toggle');
           $('#save-update').modal('show');
-          setTimeout(function(){
+          setTimeout(() => {
             $('#save-update').modal('hide');
           }, 1000);
           this.resetForm("update");
@@ -158,16 +153,13 @@ class TeachersController {
       });
     }
 
-    deleteTeacherok(){
-      teacherList.forEach((teacher, i) => {
-        if(teacher.id === this.selectedTeacher){
-          teacherList.splice(i, 1);
-          return true;
-        }   
-      });
+    deleteTeacherok(){  
+      var arrayId = teacherList.map(teacher => teacher.id);
+      var indexTeacher = arrayId.indexOf(this.selectedTeacher);
+      teacherList.splice(indexTeacher,1);
       $('#delete-teacher').modal('toggle');
       $('#save-delete').modal('show');
-      setTimeout(function(){
+      setTimeout(() => {
         $('#save-delete').modal('hide');
       }, 1000);
       this.listTeachers();

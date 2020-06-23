@@ -11,16 +11,19 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name">
+              <form id="id-form-create">
+                <div class="form-group" >
+                  <label for="name">Name</label>  
+                  <input type="text" class="form-control" id="input-name-create">
+                  <div class="invalid-feedback">
+                    Please choose a Name.
+                  </div>  
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create</button>
+              <button type="button" class="btn btn-primary"   onclick="courseController.createdCourse()">Create</button>
             </div>
           </div>
         </div>
@@ -28,7 +31,7 @@
       <!-- fin modal create course -->
 
       <!-- Modal Update Course -->
-      <div class="modal fade" id="modal-update-student" tabindex="-1" role="dialog"  aria-hidden="true">
+      <div class="modal fade" id="modal-update-course" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -38,16 +41,19 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form id="id-form-update">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name">
+                  <input type="text" class="form-control " id="input-name-update">
+                  <div class="invalid-feedback">
+                    Please choose a Name.
+                  </div>  
                 </div>
               </form> 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-primary" onclick="courseController.updateCourse()">Update</button>
             </div>
           </div>
         </div>
@@ -69,12 +75,37 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Delete</button>
+              <button type="button" class="btn btn-primary" onclick="courseController.deleteCourseok()">Delete</button>
             </div>
           </div>
         </div>
       </div>
       <!-- fin modal delete course -->
+      <!--modal update ok-->
+      <div class="modal" id="save-update-course" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Update.</strong> Course was successfully updated.
+          </div>
+        </div>
+      </div>
+   <!--modal create ok-->
+      <div class="modal" id="save-create-course" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Create.</strong> Course was successfully Created.
+          </div>
+        </div>
+      </div>
+   <!--modal delete ok-->
+      <div class="modal" id="save-delete-course" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="alert alert-success alert-dismissible fade show" id="alert-create-subject" role="alert">
+            <strong>Successful Delete.</strong> Course was successfully Delete.
+          </div>
+        </div>
+      </div>
+
 
       <section class="course-title  mb-4">
         <h1>Courses</h1>
@@ -89,7 +120,7 @@
         </div>
       </section>
       <section class="course-table">
-        <table class="table table-bordered table-radius table-striped">
+        <table class="table table-bordered table-radius table-striped" >
           <thead class="thead-blue">
             <tr>
               <th class="text-center">ID</th>
@@ -106,7 +137,7 @@
               </th>
             </tr>
           </thead>
-            <tbody>
+            <tbody id="table-course">
               <tr>
                 <th class="text-center" scope="row">1</th>
                 <td>Mark</td>
@@ -182,3 +213,8 @@
       </section>
     </div>
 </div>
+
+<script>
+  var courseController = new CoursesController();
+  courseController.listCourses()
+</script>
