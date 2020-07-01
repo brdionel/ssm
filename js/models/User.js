@@ -2,12 +2,10 @@ class User {
   id;
   name;
   lastName;
-  user;
-  constructor(id, name, lastName, user){
+  constructor(id, name, lastName){
     this.id = id;
     this.name = name;
-    this.lastName = lastName;
-    this.user = user; 
+    this.lastName = lastName; 
   }
 }
 
