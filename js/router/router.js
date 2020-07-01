@@ -26,11 +26,6 @@ var router = [
     url: '/views/subjects.html',
   },
   {
-    route: '/subjects',
-    name: 'Subjects',
-    url: '/views/subjects.html',
-  },
-  {
     route: '/students',
     name: 'Students',
     url: '/views/students.html',
@@ -39,5 +34,10 @@ var router = [
     route: '/courses',
     name: 'Courses',
     url: '/views/courses.html',
+  },
+  {
+    route:'/schedules',
+    name: 'Schedules',
+    url: '/views/schedules.html',
   },
 ];
