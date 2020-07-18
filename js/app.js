@@ -1,4 +1,5 @@
 var appContainer;
+var baseUrl = 'http://localhost:8000';
 
 $(document).ready(function(){
   appContainer = document.getElementById('app');

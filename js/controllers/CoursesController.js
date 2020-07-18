@@ -34,8 +34,9 @@ class CoursesController {
   
 
     listCourses() {
+      coursesService.listAll().then(courseList => {
         var courseToShow = courseList.map((item, i) => {
-          return new Course(item.id, item.name);
+          return new Course(item.id_course, item.name);
         });
     
         var rowHtml = '';
@@ -57,53 +58,44 @@ class CoursesController {
         });
     
         document.getElementById('table-course').innerHTML = rowHtml;
-        
+      });
     };    
+
     createdCourse(){
         if ( ! this.validate(this.formCreate) ) return false;
-        var id = courseList[courseList.length-1].id+1;
-        var name = document.getElementById('input-name-create').value;
-        var newCourse = new Course(id,name,);
-        courseList.push(newCourse);
-        this.listCourses();
-  
-        $('#modal-create-course').modal('toggle');
-        $('#save-create-course').modal('show');
-        setTimeout(() =>{
-          $('#save-create-course').modal('hide');
-        }, 1000);
-        this.resetForm('create');
+        var name = this.formCreate.name.element.value;
+        var newCourse = new Course(null, name);
+
+        coursesService.create(newCourse).then(resp => {
+          this.listCourses();
+          $('#modal-create-course').modal('toggle');
+          this.showMessage(resp);
+          this.resetForm('create');
+        });
     };
+
     deleteCourseok(){  
-        var arrayId = courseList.map(course => course.id);
-        var indexCourse = arrayId.indexOf(this.selectedCourse);
-        courseList.splice(indexCourse, 1);
+      coursesService.delete(this.selectedCourse).then(resp => {
         $('#modal-delete-course').modal('toggle');
-        $('#save-delete-course').modal('show');
-        setTimeout(() => {
-          $('#save-delete-course').modal('hide');
-        }, 1000);
+        this.showMessage(resp);
+        this.selectedCourse = null;
         this.listCourses();
+      });
+       
     };
     
     updateCourse(){
       if ( ! this.validate(this.formUpdate) ) return false;
-      courseList.forEach((course) => {
-        if(course.id === this.selectedCourse){
-          var arrayCourse = courseList.indexOf(course);
-          var name = document.getElementById('input-name-update').value;
-          courseList[arrayCourse].name = name;
-
-          $('#modal-update-course').modal('toggle');
-          $('#save-update-course').modal('show');
-          setTimeout(() =>{
-            $('#save-update-course').modal('hide');
-          }, 1000);
-          this.resetForm("update");
-          return true;
+        if(this.selectedCourse){
+          this.selectedCourse.name = this.formUpdate.name.element.value;
+          coursesService.update(this.selectedCourse).then(resp => {
+            $('#modal-update-course').modal('toggle');
+            this.showMessage(resp);
+            this.resetForm("update");
+            this.selectedCourse = null;
+            this.listCourses();
+          });
         }
-      })
-      this.listCourses();
     };
 
     validate(form){
@@ -129,17 +121,6 @@ class CoursesController {
         })
         return response;
     };
-    resetForm(formName){
-        document.getElementById(`id-form-${formName}`).reset();
-        var inputform = document.querySelectorAll(`#id-form-${formName} input`);
-        inputform.forEach((item) =>{
-          item.classList.remove('is-invalid','is-valid');  
-        });
-    };
-    courseSelect(id){
-      var idselect = id;
-      this.selectedCourse = idselect;
-    };   
 
     resetForm(formName){
         document.getElementById(`id-form-${formName}`).reset();
@@ -148,25 +129,24 @@ class CoursesController {
           item.classList.remove('is-invalid','is-valid');  
         });
     };
+
+    courseSelect(id){
+      coursesService.getById(id).then(resp => {
+        this.selectedCourse = new Course(resp.id_course, resp.name);
+        this.formUpdate.name.element.value = resp.name;
+      });
+    };
+
+    showMessage(data) {
+      $('#save-message-course .alert')
+        .removeClass('alert-danger')  
+        .removeClass('alert-success')  
+        .addClass(data.error? 'alert-danger' : 'alert-success')
+        .text(data.message);
+      $('#save-message-course').modal('show');
+      setTimeout(() => {
+        $('#save-message-course').modal('hide');
+      }, 3000);
+    }
 
 }
-var courseList = [
-    {
-      id: 1,
-      name: 'primero',
-    },
-    {
-      id: 2,
-      name: 'segundo', 
-    },
-    {
-      id: 3,
-      name: 'tercero',
-    },
-    {
-      id: 4,
-      name: 'cuarto',
-
-    },
-   
-  ];
