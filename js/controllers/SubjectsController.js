@@ -1,7 +1,6 @@
 class SubjectsController {
 
   selectedSubject = null;
-  idPosition = null;
   
   formCreate = {
     name: {
@@ -34,27 +33,29 @@ class SubjectsController {
       this.resetForm('update');
     });
   }
-
+  
   listSubjects() {
-    var subjectsToShow = subjectList.map((item, i) => {
-      return new Subject(item.id, item.name);
-    });
-
-    var rowHtml = '';
-    subjectsToShow.forEach((item) => {
-      rowHtml += `
-      <tr>
-        <td><b>${item.id}</b></td>
-        <td>${item.name}</td>
-        <th scope="col">
-          <a onclick="subjectController.position(${item.id})" href="#!" class="action-icon"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i></a>
-          <a onclick="subjectController.position(${item.id})" href="#!" class="action-icon"><i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></a>
-        </th>
-      </tr>
-      `;
-    });
+    subjectsService.listAll().then(subjectList => {
+      var subjectsToShow = subjectList.map((item, i) => {
+        return new Subject(item.id_subject, item.name);
+      });
+    
+      var rowHtml = '';
+      subjectsToShow.forEach((item) => {
+        rowHtml += `
+        <tr>
+          <td><b>${item.id}</b></td>
+          <td>${item.name}</td>
+          <th scope="col">
+            <a onclick="subjectController.position(${item.id})" href="#!" class="action-icon"><i class="fas fa-edit mr-4" data-toggle="modal" data-target="#edit-modal"></i></a>
+            <a onclick="subjectController.position(${item.id})" href="#!" class="action-icon"><i class="fas fa-trash-alt" data-toggle="modal" data-target="#delete-modal"></i></a>
+          </th>
+        </tr>
+        `;
+      });
       document.getElementById('table-subject').innerHTML = rowHtml;
-  }
+    });
+  };
     
   validation(form) {
     var formKeys = Object.keys(form);
@@ -83,54 +84,49 @@ class SubjectsController {
       
   createSubject() {
     if ( ! this.validation(this.formCreate) ) return false;
-    var ultimo= subjectList [subjectList.length -1];
-    var ultimoid = ultimo.id+1 ;
-    var subjectNew = document.getElementById('subject-new').value;
-    subjectList.push(new Subject(ultimoid, subjectNew));
-    this.listSubjects(); 
-    $('#create-modal').modal('toggle');
-    $('#save-subjects').modal('show');
-    setTimeout(() =>{
-      $('#save-subjects').modal('hide');
-    }, 2000);
-    this.resetForm('create');
+    var name = this.formCreate.name.element.value;
+    var newSubject = new Subject(null, name);
+
+    subjectsService.create(newSubject).then(resp => {
+      this.listSubjects(); 
+      $('#create-modal').modal('toggle');
+      this.showMessage(resp);
+      this.resetForm('create');
+    });
   }
       
       // add update function
       
   updateSubject() { 
     if ( ! this.validation(this.formUpdate) ) return false;
-    subjectList.forEach((subject) => {
-      if (subject.id === this.idPosition){
-        var subjectSelect = subjectList.indexOf(subject);
-        var subjectNew = document.getElementById('subject-edit').value;
-        subjectList[subjectSelect].name = subjectNew;
+    if (this.selectedSubject){
+      this.selectedSubject.name = this.formUpdate.name.element.value;
+      subjectsService.update(this.selectedSubject).then(resp => {
         $('#edit-modal').modal('toggle');
-        $('#update-subjects').modal('show');
-        setTimeout(() =>{
-          $('#update-subjects').modal('hide');
-        }, 2000);
-      }
-    });  
-    this.resetForm('update');
-    this.listSubjects();
+        this.showMessage(resp);
+        this.resetForm('update');
+        this.selectedSubject = null;
+        this.listSubjects();
+      });
+    } 
   }
       // add delete function
 
-  position(idPos){
-    this.idPosition = idPos;
+  position(id){
+    subjectsService.getById(id).then(resp => {
+      this.selectedSubject = new Subject(resp.id_subject, resp.name);
+      this.formUpdate.name.element.value = resp.name;
+    });
   }
-  deleteSubject() { 
-    var idSubject = subjectList.map(subject => subject.id);
-    var subjectPos = idSubject.indexOf(this.idPosition);
-    subjectList.splice(subjectPos, 1);
-    $('#delete-modal').modal('toggle');
-    $('#delete-subjects').modal('show');
-    setTimeout(() =>{
-      $('#delete-subjects').modal('hide');
-    }, 2000); 
-    this.listSubjects();
-  }  
+
+  deleteSubject(){ 
+    subjectsService.delete(this.selectedSubject).then(resp => {
+      $('#delete-modal').modal('toggle');
+      this.showMessage(resp);
+      this.selectedSubject = null;
+      this.listSubjects();
+    });
+  }
 
   resetForm(formName){
     document.getElementById(`form-${formName}`).reset();
@@ -139,19 +135,16 @@ class SubjectsController {
       item.classList.remove('is-invalid','is-valid');  
     });
   }
-}
 
-var subjectList = [
-  {
-    id: 1,
-    name: 'English'
-  },
-  {
-    id: 2,
-    name: 'Math'
-  },
-  {
-    id: 3,
-    name: 'Geography'
-  },
-];
+  showMessage(data){
+    $('#save-message-subjects .alert')
+      .removeClass('alert-danger')  
+      .removeClass('alert-success')  
+      .addClass(data.error? 'alert-danger' : 'alert-success')
+      .text(data.message);
+    $('#save-message-subjects').modal('show');
+    setTimeout(() => {
+      $('#save-message-subjects').modal('hide');
+    }, 3000);
+  }
+}
