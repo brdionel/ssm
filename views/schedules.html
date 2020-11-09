@@ -35,14 +35,7 @@
           <div class="form-group">
             <label for="day">Day</label>
             <select type="text" class="form-control" id="input-screate-day" placeholder="Sunday">
-              <option value="" selected="true" disabled="true">Pick a day</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="7">Sunday</option>
+              
             </select>
             <div class="invalid-feedback">
               Please select the day
@@ -58,10 +51,7 @@
           <div class="form-group">
             <label for="course">Course</label>
             <select type="text" class="form-control" id="input-screate-course">
-              <option value="" selected="true" disabled="true">Pick a course</option>
-              <option value="1">3k3</option>
-              <option value="2">1k2</option>
-              <option value="3">4k3</option>
+              
             </select>
             <div class="invalid-feedback">
               Please enter the course's name
@@ -70,10 +60,7 @@
           <div class="form-group">
             <label for="subject">Subject</label>
             <select type="text" class="form-control" id="input-screate-subject">
-              <option value="" selected="true" disabled="true">Pick a subject</option>
-              <option value="1">Math</option>
-              <option value="2">Geography</option>
-              <option value="3">Biology</option>
+              
             </select>
             <div class="invalid-feedback">
               Please enter the subject's name
@@ -82,10 +69,7 @@
           <div class="form-group">
             <label for="teacher">Teacher</label>
             <select type="text" class="form-control" id="input-screate-teacher">
-              <option value="" selected="true" disabled="true">Pick a teacher</option>
-              <option value="1">Graiff</option>
-              <option value="2">Alcaraz</option>
-              <option value="3">Peter languila</option>
+              
             </select>
             <div class="invalid-feedback">
               Please enter the teacher's name
@@ -116,15 +100,7 @@
           <div class="form-group">
             <label for="day">Day</label>
             <select type="text" class="form-control" id="input-supdate-day" placeholder="Sunday">
-              <option value="" selected="true" disabled="true">Pick a day</option>
-              <option value="1">Monday</option>
-              <option value="2">Tuesday</option>
-              <option value="3">Wednesday</option>
-              <option value="4">Thursday</option>
-              <option value="5">Friday</option>
-              <option value="6">Saturday</option>
-              <option value="7">Sunday</option>
-            </select>
+              </select>
             <div class="invalid-feedback">
               Please select the day
             </div>
@@ -139,10 +115,6 @@
           <div class="form-group">
             <label for="course">Course</label>
             <select type="text" class="form-control" id="input-supdate-course">
-              <option value="" selected="true" disabled="true">Pick a course</option>
-              <option value="1">3k3</option>
-              <option value="2">1k2</option>
-              <option value="3">4k3</option>
             </select>
             <div class="invalid-feedback">
               Please enter the course's name
@@ -151,10 +123,6 @@
           <div class="form-group">
             <label for="subject">Subject</label>
             <select type="text" class="form-control" id="input-supdate-subject">
-              <option value="" selected="true" disabled="true">Pick a subject</option>
-              <option value="1">Math</option>
-              <option value="2">Geography</option>
-              <option value="3">Biology</option>
             </select>
             <div class="invalid-feedback">
               Please enter the subject's name
@@ -163,10 +131,6 @@
           <div class="form-group">
             <label for="teacher">Teacher</label>
             <select type="text" class="form-control" id="input-supdate-teacher">
-              <option value="" selected="true" disabled="true">Pick a teacher</option>
-              <option value="1">Graiff</option>
-              <option value="2">Alcaraz</option>
-              <option value="3">Peter languila</option>
             </select>
             <div class="invalid-feedback">
               Please enter the teacher's name
@@ -176,7 +140,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" onclick="schedulesController.updateSchedules(document.forms['form-schedules-update'].elements[0].value, document.forms['form-schedules-update'].elements[1].value, document.forms['form-schedules-update'].elements[2].value,document.forms['form-schedules-update'].elements[3].value,document.forms['form-schedules-update'].elements[4].value)">Update</button>
+        <button type="button" class="btn btn-primary" onclick="schedulesController.updateSchedules()">Update</button>
       </div>
     </div>
   </div>
@@ -205,38 +169,15 @@
 <!-- fin modal Update schedules -->
 
 <!-- alert Create Schedules -->
-<div class="modal fade" id="modal-alert-create" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal-alert-schedule" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="alert alert-success" role="alert">
       <h4 class="alert-heading">Well done!</h4>
-      The schedule has been created.
+      <p id="message-schedule"></p>
     </div>
   </div>
 </div>
 <!-- fin alert -->
-
-<!-- alert Create Schedules -->
-<div class="modal fade" id="modal-alert-delete" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Well done!</h4>
-      The schedule has been removed.
-    </div>
-  </div>
-</div>
-<!-- fin alert -->
-
-<!-- alert Update Schedules -->
-<div class="modal fade" id="modal-alert-update" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Well done!</h4>
-      The schedule has been updated.
-    </div>
-  </div>
-</div>
-<!-- fin alert -->
-
 
 <div id="schedules">
   <div class="container mt-5">
@@ -245,7 +186,8 @@
     <section class="schedules-title mb-4">
       <h1>Schedules</h1>
       <div>
-        <button type="button" class="btn btn-primary btn-lg mt-5 px-4" data-toggle="modal" data-target="#modal-create-schedules">
+        <button type="button" class="btn btn-primary btn-lg mt-5 px-4" data-toggle="modal" data-target="#modal-create-schedules" 
+        onclick="schedulesController.loadData()">
           <i class="fas fa-plus"></i>
           <span>New</span>
         </button>
@@ -269,7 +211,7 @@
             <td>Teacher</td>
             <th>
               <div class="d-flex justify-content-around align-items-center border-thead-icons">
-                <a><i class="fas fa-eye"></i></a>
+                <!-- <a><i class="fas fa-eye"></i></a> -->
                 <a><i class="fas fa-edit"></i></a>
                 <a><i class="fas fa-trash-alt"></i></a>
               </div>

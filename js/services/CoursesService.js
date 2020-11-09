@@ -23,6 +23,8 @@ class CoursesService {
   async create(course) {
     try {
       const response = await axios.post(`${baseUrl}/courses`, course);
+      console.log(response)
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error(error);

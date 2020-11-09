@@ -1,6 +1,5 @@
 class StudentsController {
   
-  ultimoId = studentList.length+1;
   selectedStudent = null;
   
   formCreate = {
@@ -65,83 +64,93 @@ class StudentsController {
 
   listStudents() {
 
-    var studentsToShow = studentList.map((item) => {
-      return new Student(item.id, item.name, item.lastName, item.file);
-    });
+    studentsService.getAll()
+    .then(response => {
+      let studentsToShow = response.map(student => {
+        return new Student(student.id_student, student.name, student.lastname, student.file)
+      })
+      
+      var rowHtml = '';
     
-    var rowHtml = '';
-    
-    studentsToShow.forEach((item) => {
-      rowHtml += `
-        <tr>
-          <td class="text-center">${item.id}</td>
-          <td>${item.name}</td>
-          <td>${item.lastName}</td>
-          <td>${item.file}</td>
-          <td>
-            <div class="d-flex justify-content-around align-items-center bloque-iconos">
-              <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-student" onclick="studentController.updateHandler(${item.id})"></i>
-              <i class="fas fa-trash-alt icono-delete" data-toggle="modal" data-target="#modal-delete-student" class="borrar-student" onclick="studentController.studentSelected(${item.id})"></i> 
-            </div>
-          </td>
-        </tr>
-      `;
-    });
-
-    document.getElementById('tbody-student').innerHTML = rowHtml;
+      studentsToShow.forEach((item) => {
+        rowHtml += `
+          <tr>
+            <td class="text-center">${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.lastName}</td>
+            <td>${item.file}</td>
+            <td>
+              <div class="d-flex justify-content-around align-items-center bloque-iconos">
+                <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-student" onclick="studentController.updateHandler(${item.id})"></i>
+                <i class="fas fa-trash-alt icono-delete" data-toggle="modal" data-target="#modal-delete-student" class="borrar-student" onclick="studentController.studentSelected(${item.id})"></i> 
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      document.getElementById('tbody-student').innerHTML = rowHtml;
+    })    
   }
-
+ 
   // add create function
   createStudent(){
     if ( ! this.validate(this.formCreate) ) return false;
     let name = this.formCreate.name.element.value;
     let lastName = this.formCreate.lastName.element.value;
     let file = this.formCreate.file.element.value;
-    var student = new Student(this.ultimoId++, name, lastName, file);
-    studentList.push(student);
-    this.listStudents();
+    var student = new Student(null, name, lastName, file);
     
-    $('#modal-create-student').modal('hide');
-    $('#modal-alert-create').modal('show');
-    setTimeout(() => {
-      $('#modal-alert-create').modal('hide');
-    }, 3000)
-    this.resetForm('create');
+    studentsService.create(student)
+    .then(response => {
+      $('#modal-create-student').modal('hide');
+      this.showMessage(response.message);
+
+      this.listStudents();
+
+      this.resetForm('create');
+    })
+    
   }
 
   // Select and load student's data
   updateHandler(idStudent){
-    this.studentSelected(idStudent);
-    this.loadDataModalUpdate();
+    this.selectedStudent = idStudent;
+    this.loadDataModalUpdate(idStudent);
   }
 
-  loadDataModalUpdate(){
-    var indexStudentToUpdate = this.indexStudent();
-    var studentToUpdate = studentList[indexStudentToUpdate];
-    this.formUpdate.name.element.value =  studentToUpdate.name;
-    this.formUpdate.lastName.element.value =  studentToUpdate.lastName;
-    this.formUpdate.file.element.value =  studentToUpdate.file;
+  loadDataModalUpdate(id){
+    var indexStudentToUpdate = id;
+    
+    studentsService.getById(id)
+    .then(studentToUpdate => {
+      this.formUpdate.name.element.value =  studentToUpdate.name;
+      this.formUpdate.lastName.element.value =  studentToUpdate.lastname;
+      this.formUpdate.file.element.value =  studentToUpdate.file;
+    })
   }
 
   // add update function
   updateStudent(){
     if ( ! this.validate(this.formUpdate) ) return false;
-    var firstNameStudent = this.formUpdate.name.element.value;
-    var lastNameStudent = this.formUpdate.lastName.element.value;
-    var fileStudent = this.formUpdate.file.element.value;
-    var indexToUpdate = this.indexStudent();
-    var updatedStudent = studentList[indexToUpdate];
-    updatedStudent.name = firstNameStudent;
-    updatedStudent.lastName = lastNameStudent;
-    updatedStudent.file = fileStudent;
-    this.listStudents();
+    var name = this.formUpdate.name.element.value;
+    var lastName = this.formUpdate.lastName.element.value;
+    var file = this.formUpdate.file.element.value;
 
-    $('#modal-update-student').modal('hide');
-    $('#modal-alert-update').modal('show');
-    setTimeout(() => {
-      $('#modal-alert-update').modal('hide');
-    }, 3000)
-    this.resetForm('update');
+    let student = { 
+      name,
+      lastName, 
+      file
+    }
+
+    studentsService.update(this.selectedStudent, student)
+    .then(response => {
+      $('#modal-update-student').modal('hide');
+      this.listStudents();
+  
+      this.showMessage(response.message)
+      this.resetForm('update');
+    })
+    
   }
 
   studentSelected(idStudent){
@@ -150,16 +159,18 @@ class StudentsController {
 
   // add delete function
   deleteStudent(){
-    var indexStudentToDelete = this.indexStudent();
-    studentList.splice(indexStudentToDelete, 1);
+    var indexStudentToDelete = this.selectedStudent;
+    // studentList.splice(indexStudentToDelete, 1);
+    console.log('el id a borrar es: '+ indexStudentToDelete)
+    studentsService.delete(indexStudentToDelete)
+    .then(res => {
+      console.log('el res que voy a amndar a showmessage es: '+ JSON.stringify(res))
+      $('#modal-delete-student').modal('hide');
+      this.showMessage(res.message)
+      
+      this.listStudents();
+    })
     
-    $('#modal-delete-student').modal('hide');
-    $('#modal-alert-delete').modal('show');
-    setTimeout(() => {
-      $('#modal-alert-delete').modal('hide');
-    }, 3000)
-    
-    this.listStudents();
   }
 
   resetForm(formName){
@@ -196,31 +207,12 @@ class StudentsController {
     return response;
   };
 
-  indexStudent(){
-    var idStudents = studentList.map(student => student.id);
-    return idStudents.indexOf(this.selectedStudent);
+  showMessage(message){
+    $("#message-student").html(message)
+    $('#modal-alert-student').modal('show');
+    setTimeout(() => {
+      $('#modal-alert-student').modal('hide');
+    }, 3000)
   }
 
 }
-
-var studentList = [
-  {
-    id: 1,
-    name: 'Bruno',
-    lastName: 'Vicente',
-    file: 23213
-  },
-  {
-    id: 2,
-    name: 'Marco',
-    lastName: 'Cuchian',
-    file: 1235132
-  },
-  {
-    id: 3,
-    name: 'Maxi',
-    lastName: 'Longoni',
-    file: 1325
-  },
-];
-

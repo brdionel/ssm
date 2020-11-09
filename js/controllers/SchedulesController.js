@@ -1,6 +1,5 @@
 class SchedulesController {
   
-    ultimoId = schedulesList.length+1;
     selectedSchedules = null;
     
     formCreate = {
@@ -87,58 +86,94 @@ class SchedulesController {
   
     listSchedules() {
   
-      var schedulesToShow = schedulesList.map((item) => {
-        return new Schedule(item.id, item.time, item.day,item.course, item.subject, item.teacher);
-      });
-      
-      var rowHtml = '';
-      
-      schedulesToShow.forEach((item) => {
-        rowHtml += `
-          <tr>
-            <td class="text-center">${item.id}</td>
-            <td>${item.time}</td>
-            <td>${item.day}</td>
-            <td>${item.course}</td>
-            <td>${item.subject}</td>
-            <td>${item.teacher}</td>
-            <td>
-              <div class="d-flex justify-content-around align-items-center bloque-iconos">
-                <i class="fas fa-eye icono-eye" data-toggle="modal" data-target="#modal-students" onclick="schedulesController.showStudents(${item.id})"></i>
-                <i class="fas fa-edit icono-update" data-toggle="modal" data-target="#modal-update-schedules"></i>
-                <i class="fas fa-trash-alt icono-delete" data-toggle="modal" data-target="#modal-delete-schedules" class="borrar-schedules"></i> 
-              </div>
-            </td>
-          </tr>
-        `;
-      });
-      document.getElementById('tbody-schedules').innerHTML = rowHtml;
+      schedulesService.getAll()
+      .then(schedules => {
+        
+        var rowHtml = '';
+        if(schedules.length > 0) {
+          schedules.forEach((item) => {
+            rowHtml += `
+              <tr>
+                <td class="text-center">${item.id_schedule}</td>
+                <td>${item.time}</td>
+                <td>${item.week_day.name}</td>
+                <td>${item.course.name}</td>
+                <td>${item.subject.name}</td>
+                <td>${item.teacher.name} ${item.teacher.lastname}</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center bloque-iconos">
+                    <i class="fas fa-edit icono-update" data-toggle="modal" 
+                    data-target="#modal-update-schedules" 
+                    onclick="schedulesController.updateHandler(${item.id_schedule})"></i>
+                    <i class="fas fa-trash-alt icono-delete" data-toggle="modal" 
+                    data-target="#modal-delete-schedules" class="borrar-schedules"
+                    onclick="schedulesController.schedulesSelected(${item.id_schedule})"></i> 
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+        } else {
+          this.showMessage('Aun no hay horarios');
+        }  
+        document.getElementById('tbody-schedules').innerHTML = rowHtml;
+      })
     }
   
     // add create function
     // i receive the values from the form
-    createSchedules(time, day, course, subject, teacher){
+    createSchedules(){
       if ( ! this.validate(this.formCreate) ) return false;
-      var schedules = new Schedule(this.ultimoId++, time, day, course, subject, teacher);
-      schedulesList.push(schedules);
-      this.listSchedules();
-      
-      $('#modal-create-schedules').modal('hide');
-      $('#modal-alert-create').modal('show');
-      setTimeout(() => {
-        $('#modal-alert-create').modal('hide');
-      }, 3000)
-      this.resetForm('create');
+      let time = this.formCreate.time.element.value;
+      let day = this.formCreate.day.element.value;
+      let course = this.formCreate.course.element.value;
+      let subject = this.formCreate.subject.element.value;
+      let teacher = this.formCreate.teacher.element.value;
+
+      let schedule = new Schedule(null, time, day, course, subject, teacher);
+      schedulesService.create(schedule)
+      .then(response => {
+        console.log(JSON.stringify(response))
+        $('#modal-create-schedules').modal('hide');
+        this.showMessage(response.message);
+        this.listSchedules();
+        this.resetForm('create');
+      })
     }
 
-    updateSchedules(id, time, day, course, subject, teacher){
+    updateSchedules(){
       if ( ! this.validate(this.formUpdate) ) return false;
-      $('#modal-update-schedules').modal('hide');
-      $('#modal-alert-update').modal('show');
-      setTimeout(() => {
-        $('#modal-alert-update').modal('hide');
-      }, 3000)
-      this.resetForm('update');
+
+      let time = this.formUpdate.time.element.value;
+      let day = this.formUpdate.day.element.value;
+      let course = this.formUpdate.course.element.value;
+      let subject = this.formUpdate.subject.element.value;
+      let teacher = this.formUpdate.teacher.element.value;
+      let schedule = new Schedule(this.selectedSchedules, time, day, course, subject, teacher);
+      console.log('el teacher que mando es: '+JSON.stringify(schedule))
+      schedulesService.update(schedule)
+      .then(response => {
+        console.log(JSON.stringify(response))
+        $('#modal-update-schedules').modal('hide');
+        this.showMessage(response.message);
+        this.listSchedules();
+        this.resetForm('update');
+      })
+      
+    }
+
+    updateHandler(id){
+      this.schedulesSelected(id);
+      this.loadDataModalUpdate(id);
+    }
+
+    loadDataModalUpdate(id){
+      schedulesService.getById(id)
+      .then(scheduleToUpdate => {
+        console.log(JSON.stringify(scheduleToUpdate))
+        this.formUpdate.time.element.value =  scheduleToUpdate.time;
+        this.loadData(id)
+      })
     }
   
     // add update function
@@ -149,17 +184,16 @@ class SchedulesController {
   
     // add delete function
     deleteSchedules(){
-      var idSchedules = schedulesList.map(schedule => schedule.id);
-      var indexSchedulesToDelete = idSchedules.indexOf(this.selectedSchedule);
-      schedulesList.splice(indexSchedulesToDelete, 1);
+      console.log(this.selectedSchedules)
+      schedulesService.delete(this.selectedSchedules)
+      .then(response => {
+        console.log('response del delete controler: '+ JSON.stringify(response))
+        $('#modal-delete-schedules').modal('hide');
+        this.showMessage(response.message)
+        this.listSchedules();
+      })
+            
       
-      $('#modal-delete-schedules').modal('hide');
-      $('#modal-alert-delete').modal('show');
-      setTimeout(() => {
-        $('#modal-alert-delete').modal('hide');
-      }, 3000)
-      
-      this.listSchedules();
     }
   
     resetForm(formName){
@@ -174,6 +208,7 @@ class SchedulesController {
         item.selectedIndex = 0 ;
       });
     }
+
     showStudents(idSchedule){
         var studentsHtml = '';
 
@@ -184,6 +219,76 @@ class SchedulesController {
         })
 
         document.getElementById('modal-list-student').innerHTML = studentsHtml;
+    }
+
+    loadData(id_schedules){
+      console.log('llega a ejecutarse el loadData')
+
+      schedulesService.getWeekDays()
+      .then(days => {
+        let optionsDays = ""
+        optionsDays = `<option value="" selected="true" disabled="true">Pick a day</option>`;
+
+        days.forEach( day => {
+          optionsDays += `<option value=${day.id_week_day}>${day.name}</option>`
+        })
+
+        if(id_schedules){
+          document.getElementById('input-supdate-day').innerHTML = optionsDays
+        } else {
+          document.getElementById('input-screate-day').innerHTML = optionsDays
+        }
+      })
+
+      coursesService.listAll()
+      .then(courses => {
+        let optionsCourses = ""
+        optionsCourses = `<option value="" selected="true" disabled="true">Pick a course</option>`;
+
+        courses.forEach( course => {
+          optionsCourses += `<option value=${course.id_course}>${course.name}</option>`
+        })
+
+        if(id_schedules){
+          document.getElementById('input-supdate-course').innerHTML = optionsCourses
+        } else {
+          document.getElementById('input-screate-course').innerHTML = optionsCourses
+        }
+
+      })
+
+      subjectsService.listAll()
+      .then( subjects => {
+        let optionsSubjects = "";
+        optionsSubjects = `<option value="" selected="true" disabled="true">Pick a subject</option>`;
+      
+        subjects.forEach( subject => {
+          optionsSubjects += `<option value=${subject.id_subject}>${subject.name}</option>`
+        })
+        
+        if(id_schedules){
+          document.getElementById('input-supdate-subject').innerHTML = optionsSubjects
+        } else {
+          document.getElementById('input-screate-subject').innerHTML = optionsSubjects
+        }
+      })
+
+      teachersService.listall()
+      .then( teachers => {
+        let optionsTeachers = "";
+        optionsTeachers = `<option value="" selected="true" disabled="true">Pick a teacher</option>`;
+      
+        teachers.forEach( teacher => {
+          optionsTeachers += `<option value=${teacher.id_teacher}>${teacher.name} ${teacher.lastname}</option>`
+        })
+
+        if(id_schedules){
+          document.getElementById('input-supdate-teacher').innerHTML = optionsTeachers
+        } else {
+          document.getElementById('input-screate-teacher').innerHTML = optionsTeachers
+        }
+      })
+
     }
   
     validate(form){
@@ -211,85 +316,12 @@ class SchedulesController {
   
       return response;
     };
-  
+
+    showMessage(message){ 
+      $('#message-schedule').html(message);
+      $('#modal-alert-schedule').modal('show');
+      setTimeout(() => {
+        $('#modal-alert-schedule').modal('hide');
+      }, 3000)
+    }
   }
-  
-  var schedulesList = [
-    {
-      id: 1,
-      time: '22:00',
-      day:'Sunday',
-      course: '3k3',
-      subject: 'Math',
-      teacher: 'Graif',
-      students: ['Jose','Pedro']
-    },
-    {
-      id: 2,
-      time: '20:00',
-      day:'Sunday',
-      course: '3k1',
-      subject: 'Math',
-      teacher: 'Alcaraz',
-      students: ['Nacho','Pedro']
-    },
-    {
-      id: 3,
-      time: '21:00',
-      day:'Sunday',
-      course: '3k12',
-      subject: 'Math',
-      teacher: 'Peter Languila',
-      students: ['Franco','Pedro']
-    },
-  ];
-  var coursesList = [
-    {
-      id: 1,
-      name:'3k2'
-    },
-    {
-      id: 2,
-      name:'3k1'
-    },
-    {
-      id: 3,
-      name:'3k12'
-    },
-  ];
-  var teachersList = [
-    {
-      id: 1,
-      name: 'Gustavo',
-      lastName:'Graiff',
-      registration: '72245'
-    },
-    {
-      id: 2,
-      name: 'Huguito',
-      lastName:'Alcaraz',
-      registration: '6666'
-    },
-    {
-      id: 3,
-      name: 'Peter',
-      lastName:'Languila',
-      registration: '4785'
-    },
-  ];
-  var subjectsList = [
-    {
-      id: 1,
-      name:'Math'
-    },
-    {
-      id: 2,
-      name:'Geography'
-    },
-    {
-      id: 3,
-      name:'Biology'
-    },
-  ];
-  
-  
