@@ -18,7 +18,7 @@ Front-end. Aplicacion Web que administra horarios de cursos.
 [Repositorio de la API](https://github.com/brdionel/ssm-api)
 
 
-##Demo
+### Demo
 ![DemoProyecto](https://res.cloudinary.com/dtnixnyfz/image/upload/v1605020353/Ma7XrwuPlJ_uboxoh.gif)
 
 ### Lider del Proyecto
